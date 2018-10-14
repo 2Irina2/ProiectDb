@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">EchipamenteAutomatizare</string>
+
+    <string name="drawer_item_cpus">CPUs</string>
+    <string name="drawer_item_io_onboard">I/Os Onboard</string>
+    <string name="drawer_item_cards">Cards</string>
+    <string name="drawer_item_protocols">Protocols</string>
+    <string name="drawer_item_manufacturers">Manufacturers</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

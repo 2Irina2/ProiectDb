@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_cpus"
+            android:icon="@drawable/ic_cpu_black_24dp"
+            android:title="@string/drawer_item_cpus" />
+        <item
+            android:id="@+id/nav_io_onboard"
+            android:icon="@drawable/ic_onboard_black_24dp"
+            android:title="@string/drawer_item_io_onboard" />
+        <item
+            android:id="@+id/nav_cards"
+            android:icon="@drawable/ic_card_black_24dp"
+            android:title="@string/drawer_item_cards" />
+        <item
+            android:id="@+id/nav_protocols"
+            android:icon="@drawable/ic_protocols_black_24dp"
+            android:title="@string/drawer_item_protocols" />
+        <item
+            android:id="@+id/nav_manufacturers"
+            android:icon="@drawable/ic_manufacturers_black_24dp"
+            android:title="@string/drawer_item_manufacturers" />
+    </group>
+</menu>
