@@ -5,29 +5,32 @@ import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
 import android.support.annotation.NonNull;
 
-@Entity(tableName = "protocols")
-public class Protocol {
-
+@Entity(tableName = "cards")
+public class Card {
     @PrimaryKey(autoGenerate = true)
     private int id;
     @NonNull
     private String name;
+    private int channels;
     @NonNull
-    private String interf;
+    private String family;
     @NonNull
     private String type;
 
     @Ignore
-    public Protocol(@NonNull String name, @NonNull String interf, @NonNull String type){
+    public Card(@NonNull String name, int channels, @NonNull String family, @NonNull String type){
         this.name = name;
-        this.interf = interf;
+        this.channels = channels;
+        this.family = family;
         this.type = type;
     }
 
-    public Protocol(int id, @NonNull String name, @NonNull String interf, @NonNull String type){
+    @Ignore
+    public Card(int id, @NonNull String name, int channels, @NonNull String family, @NonNull String type){
         this.id = id;
         this.name = name;
-        this.interf = interf;
+        this.channels = channels;
+        this.family = family;
         this.type = type;
     }
 
@@ -40,9 +43,13 @@ public class Protocol {
         return name;
     }
 
+    public int getChannels() {
+        return channels;
+    }
+
     @NonNull
-    public String getInterf() {
-        return interf;
+    public String getFamily() {
+        return family;
     }
 
     @NonNull
@@ -50,3 +57,4 @@ public class Protocol {
         return type;
     }
 }
+

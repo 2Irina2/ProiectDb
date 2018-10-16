@@ -1,4 +1,4 @@
-package com.example.android.echipamenteautomatizare;
+package com.example.android.echipamenteautomatizare.DAOs;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.persistence.room.Dao;

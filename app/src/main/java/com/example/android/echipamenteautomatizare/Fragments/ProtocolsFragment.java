@@ -16,6 +16,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -130,29 +132,32 @@ public class ProtocolsFragment extends Fragment {
     }
 
     private void addProtocol(View dialog, AlertDialog alertDialog){
-       /* EditText nameField = dialog.findViewById(R.id.edittext_manufacturer_name);
-        EditText familyField = dialog.findViewById(R.id.edittext_manufacturer_family);
+        EditText nameField = dialog.findViewById(R.id.edittext_protocol_name);
+        EditText interfaceField = dialog.findViewById(R.id.edittext_protocol_interf);
+        RadioGroup typeGroup = dialog.findViewById(R.id.radiogroup_protocol_type);
 
         String name = nameField.getText().toString();
-        String family = familyField.getText().toString();
+        String interf = interfaceField.getText().toString();
+        int checkedRadioButtonId = typeGroup.getCheckedRadioButtonId();
+        String type = ((RadioButton) dialog.findViewById(checkedRadioButtonId)).getText().toString();
 
         if(name.equals("")){
-            if(family.equals("")){
+            if(interf.equals("")){
                 alertDialog.cancel();
                 Toast.makeText(getContext(), "No item was added to database", Toast.LENGTH_SHORT).show();
                 return;
             }
             nameField.setError("Must not be empty");
-        } else if(family.equals("")){
-            familyField.setError("Must not be empty");
+        } else if(interf.equals("")){
+            interfaceField.setError("Must not be empty");
         } else {
-            mDb.manufacturerDao().insertManufacturer(new Manufacturer(name, family));
+            mDb.protocolDao().insertProtocol(new Protocol(name, interf, type));
             alertDialog.cancel();
-        }*/
+        }
     }
 
     private void deleteProtocol(int position){
         List<Protocol> protocols = mAdapter.getProtocols();
-        mDb.manufacturerDao().deleteProtocol(protocols.get(position));
+        mDb.protocolDao().deleteProtocol(protocols.get(position));
     }
 }

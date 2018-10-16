@@ -15,9 +15,6 @@ import java.util.List;
 
 public class ProtocolsAdapter extends RecyclerView.Adapter<ProtocolsAdapter.MyViewHolder> {
 
-    private static final int TIP_MASTER_SLAVE = 0;
-    private static final int TIP_CLIENT_SERVER = 1;
-
     private List<Protocol> myProtocols;
     private Context mContext;
 
@@ -50,13 +47,7 @@ public class ProtocolsAdapter extends RecyclerView.Adapter<ProtocolsAdapter.MyVi
         Protocol protocol = myProtocols.get(position);
         holder.protocolName.setText(protocol.getName());
         holder.protocolInterface.setText(protocol.getInterf());
-        if (protocol.getType() == TIP_MASTER_SLAVE) {
-            holder.protocolType.setText("master_slave");
-        } else if(protocol.getType() == TIP_CLIENT_SERVER) {
-            holder.protocolType.setText("client_server");
-        } else {
-            holder.protocolType.setText("N/A");
-        }
+        holder.protocolType.setText(protocol.getType());
     }
 
     @Override
