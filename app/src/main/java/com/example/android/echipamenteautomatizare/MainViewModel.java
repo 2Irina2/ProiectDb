@@ -5,6 +5,7 @@ import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.LiveData;
 import android.support.annotation.NonNull;
 
+import com.example.android.echipamenteautomatizare.Objects.Card;
 import com.example.android.echipamenteautomatizare.Objects.Manufacturer;
 import com.example.android.echipamenteautomatizare.Objects.Protocol;
 
@@ -14,12 +15,14 @@ public class MainViewModel extends AndroidViewModel {
 
     private LiveData<List<Manufacturer>> manufacturers;
     private LiveData<List<Protocol>> protocols;
+    private LiveData<List<Card>> cards;
 
     public MainViewModel(@NonNull Application application){
         super(application);
         AppDatabase appDatabase = AppDatabase.getsInstance(this.getApplication());
         manufacturers = appDatabase.manufacturerDao().loadAllManufacturers();
         protocols = appDatabase.protocolDao().loadAllProtocols();
+        cards = appDatabase.cardDao().loadAllCards();
     }
 
     public LiveData<List<Manufacturer>> getManufacturers() {
@@ -27,5 +30,8 @@ public class MainViewModel extends AndroidViewModel {
     }
     public LiveData<List<Protocol>> getProtocols() {
         return protocols;
+    }
+    public LiveData<List<Card>> getCards(){
+        return cards;
     }
 }

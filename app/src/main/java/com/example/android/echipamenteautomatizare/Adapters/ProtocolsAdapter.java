@@ -27,11 +27,6 @@ public class ProtocolsAdapter extends RecyclerView.Adapter<ProtocolsAdapter.MyVi
         notifyDataSetChanged();
     }
 
-    public void removeAt(int position) {
-        myProtocols.remove(position);
-        notifyItemRemoved(position);
-    }
-
     public List<Protocol> getProtocols() {
         return myProtocols;
     }

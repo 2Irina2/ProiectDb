@@ -7,6 +7,11 @@
     <string name="drawer_item_protocols">Protocols</string>
     <string name="drawer_item_manufacturers">Manufacturers</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string-array name="card_names">
+        <item>DI</item>
+        <item>DO</item>
+        <item>AI</item>
+        <item>AO</item>
+        <item>CM</item>
+    </string-array>
 </resources>

@@ -27,11 +27,6 @@ public class ManufacturersAdapter extends RecyclerView.Adapter<ManufacturersAdap
         notifyDataSetChanged();
     }
 
-    public void removeAt(int position){
-        myManufacturers.remove(position);
-        notifyItemRemoved(position);
-    }
-
     public List<Manufacturer> getManufacturers() {
         return myManufacturers;
     }

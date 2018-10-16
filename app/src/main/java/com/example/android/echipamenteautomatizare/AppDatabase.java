@@ -8,6 +8,7 @@ import android.arch.persistence.room.migration.Migration;
 import android.content.Context;
 import android.util.Log;
 
+import com.example.android.echipamenteautomatizare.DAOs.CardDao;
 import com.example.android.echipamenteautomatizare.DAOs.ManufacturerDao;
 import com.example.android.echipamenteautomatizare.DAOs.ProtocolDao;
 import com.example.android.echipamenteautomatizare.Objects.Manufacturer;
@@ -47,4 +48,5 @@ public abstract class AppDatabase extends RoomDatabase {
 
     public abstract ManufacturerDao manufacturerDao();
     public abstract ProtocolDao protocolDao();
+    public abstract CardDao cardDao();
 }
