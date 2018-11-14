@@ -8,16 +8,18 @@ import android.arch.persistence.room.migration.Migration;
 import android.content.Context;
 import android.util.Log;
 
+import com.example.android.echipamenteautomatizare.DAOs.CPUDao;
 import com.example.android.echipamenteautomatizare.DAOs.CardDao;
 import com.example.android.echipamenteautomatizare.DAOs.IOOnboardDao;
 import com.example.android.echipamenteautomatizare.DAOs.ManufacturerDao;
 import com.example.android.echipamenteautomatizare.DAOs.ProtocolDao;
+import com.example.android.echipamenteautomatizare.Objects.CPU;
 import com.example.android.echipamenteautomatizare.Objects.Card;
 import com.example.android.echipamenteautomatizare.Objects.IOOnboard;
 import com.example.android.echipamenteautomatizare.Objects.Manufacturer;
 import com.example.android.echipamenteautomatizare.Objects.Protocol;
 
-@Database(entities = {Manufacturer.class, Protocol.class, Card.class, IOOnboard.class}, version = 6, exportSchema = false)
+@Database(entities = {Manufacturer.class, Protocol.class, Card.class, IOOnboard.class, CPU.class}, version = 8, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
     private static final String LOG_TAG = AppDatabase.class.getSimpleName();
     private static final Object LOCK = new Object();
@@ -88,4 +90,5 @@ public abstract class AppDatabase extends RoomDatabase {
     public abstract ProtocolDao protocolDao();
     public abstract CardDao cardDao();
     public abstract IOOnboardDao ioOnboardDao();
+    public abstract CPUDao cpuDao();
 }

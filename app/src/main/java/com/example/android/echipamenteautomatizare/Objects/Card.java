@@ -13,7 +13,7 @@ import static android.arch.persistence.room.ForeignKey.CASCADE;
                                   parentColumns = "id",
                                   childColumns = "manufacturerId",
                                   onDelete = CASCADE))
-    public class Card {
+public class Card {
     @PrimaryKey(autoGenerate = true)
     private int id;
     @NonNull

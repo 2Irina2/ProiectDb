@@ -16,6 +16,15 @@ public interface IOOnboardDao {
     @Query("SELECT * FROM ioonboards")
     LiveData<List<IOOnboard>> loadAllIOOnboards();
 
+    @Query("SELECT channels FROM ioonboards WHERE id=:id")
+    int loadChannelsForIOOnboard(final int id);
+
+    @Query("SELECT name FROM ioonboards WHERE id=:id")
+    String loadNameForIOOnboard(final int id);
+
+    @Query("SELECT id FROM ioonboards")
+    List<Integer> loadIds();
+
     @Insert
     void insertIOOnboard(IOOnboard ioOnboard);
 
