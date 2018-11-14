@@ -3,12 +3,26 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Fragments.IOOnboardFragment">
+    tools:context=".Fragments.ManufacturersFragment">
 
-    <!-- TODO: Update blank fragment layout -->
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerview_ioonboards"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
     <TextView
+        android:id="@+id/empty_listview_ioonboards"
+        android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="onboard" />
+        android:text="No IOOnboards in the database" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab_ioonboards"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
+        android:src="@drawable/ic_add_black_24dp"
+        android:layout_margin="16dp" />
 
 </FrameLayout>

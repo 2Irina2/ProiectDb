@@ -6,6 +6,7 @@ import android.arch.lifecycle.LiveData;
 import android.support.annotation.NonNull;
 
 import com.example.android.echipamenteautomatizare.Objects.Card;
+import com.example.android.echipamenteautomatizare.Objects.IOOnboard;
 import com.example.android.echipamenteautomatizare.Objects.Manufacturer;
 import com.example.android.echipamenteautomatizare.Objects.Protocol;
 
@@ -16,6 +17,7 @@ public class MainViewModel extends AndroidViewModel {
     private LiveData<List<Manufacturer>> manufacturers;
     private LiveData<List<Protocol>> protocols;
     private LiveData<List<Card>> cards;
+    private LiveData<List<IOOnboard>> ioOnboards;
 
     public MainViewModel(@NonNull Application application){
         super(application);
@@ -23,6 +25,7 @@ public class MainViewModel extends AndroidViewModel {
         manufacturers = appDatabase.manufacturerDao().loadAllManufacturers();
         protocols = appDatabase.protocolDao().loadAllProtocols();
         cards = appDatabase.cardDao().loadAllCards();
+        ioOnboards = appDatabase.ioOnboardDao().loadAllIOOnboards();
     }
 
     public LiveData<List<Manufacturer>> getManufacturers() {
@@ -33,5 +36,8 @@ public class MainViewModel extends AndroidViewModel {
     }
     public LiveData<List<Card>> getCards(){
         return cards;
+    }
+    public LiveData<List<IOOnboard>> getIOOnboards(){
+        return ioOnboards;
     }
 }

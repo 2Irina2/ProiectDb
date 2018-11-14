@@ -30,7 +30,14 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
+            android:background="@color/colorAccent"
             android:entries="@array/card_names"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_below="@id/linearlayout1_card"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
         <TextView
             android:id="@+id/textview_card_family"
             android:layout_width="0dp"
@@ -43,13 +50,6 @@
             android:layout_weight="2"
             android:layout_height="wrap_content"
             />
-    </LinearLayout>
-    <LinearLayout
-        android:layout_below="@id/linearlayout1_card"
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
         <TextView
             android:id="@+id/textview_card_type"
             android:layout_width="0dp"
@@ -59,7 +59,7 @@
         <EditText
             android:id="@+id/edittext_card_type"
             android:layout_width="0dp"
-            android:layout_weight="5"
+            android:layout_weight="4"
             android:layout_height="wrap_content" />
     </LinearLayout>
 

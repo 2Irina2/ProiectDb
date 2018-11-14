@@ -31,7 +31,7 @@ public class AdminActivity extends AppCompatActivity {
         ActionBar actionbar = getSupportActionBar();
         actionbar.setDisplayHomeAsUpEnabled(true);
         actionbar.setHomeAsUpIndicator(R.drawable.ic_menu_black_24dp);
-        getSupportActionBar().setTitle("Echipamente Auomatizare");
+        getSupportActionBar().setTitle("Echipamente Automatizare");
 
         mDrawerLayout = findViewById(R.id.drawer_layout);
         setupDrawerContent((NavigationView) findViewById(R.id.nav_view));

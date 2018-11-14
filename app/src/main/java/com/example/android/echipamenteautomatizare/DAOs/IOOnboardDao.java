@@ -7,22 +7,18 @@ import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.Query;
 
 import com.example.android.echipamenteautomatizare.Objects.Card;
+import com.example.android.echipamenteautomatizare.Objects.IOOnboard;
 
 import java.util.List;
 
 @Dao
-public interface CardDao {
-    @Query("SELECT * FROM cards")
-    LiveData<List<Card>> loadAllCards();
-
-    @Query("SELECT * FROM cards WHERE manufacturerId=:manufacturerId")
-    LiveData<List<Card>> loadCardsForManufacturer(final int manufacturerId);
+public interface IOOnboardDao {
+    @Query("SELECT * FROM ioonboards")
+    LiveData<List<IOOnboard>> loadAllIOOnboards();
 
     @Insert
-    void insertCard(Card card);
+    void insertIOOnboard(IOOnboard ioOnboard);
 
     @Delete
-    void deleteCard(Card card);
-
-
+    void deleteIOOnboard(IOOnboard ioOnboard);
 }

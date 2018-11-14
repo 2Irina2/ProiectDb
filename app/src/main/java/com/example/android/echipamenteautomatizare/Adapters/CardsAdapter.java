@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.android.echipamenteautomatizare.AppDatabase;
 import com.example.android.echipamenteautomatizare.Objects.Card;
 import com.example.android.echipamenteautomatizare.R;
 
@@ -40,8 +41,10 @@ public class CardsAdapter extends RecyclerView.Adapter<CardsAdapter.MyViewHolder
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         Card card = myCards.get(position);
         holder.cardName.setText(card.getName());
-        holder.cardChannels.setText(card.getChannels());
-        holder.cardFamily.setText(card.getFamily());
+        holder.cardChannels.setText(String.valueOf(card.getChannels()));
+        int manId = card.getManufacturerId();
+        String family = AppDatabase.getsInstance(mContext).manufacturerDao().loadFamilyForManufacturer(manId);
+        holder.cardFamily.setText(family);
         holder.cardType.setText(card.getType());
     }
 

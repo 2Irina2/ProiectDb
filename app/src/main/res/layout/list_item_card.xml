@@ -1,31 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
     <TextView
         android:id="@+id/card_channels"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="5"/>
+        android:layout_height="wrap_content" />
     <TextView
         android:id="@+id/card_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toEndOf="@id/cards_channels"
-        android:text="AD"
-        android:layout_toRightOf="@id/cards_channels" />
+        android:layout_toEndOf="@id/card_channels"
+        android:layout_toRightOf="@id/card_channels" />
     <TextView
         android:id="@+id/card_family"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
-        android:text="1211001"
         android:layout_alignParentRight="true" />
     <TextView
         android:id="@+id/card_type"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/cards_channels"
-        android:text="Releu"/>
+        android:layout_below="@id/card_channels" />
 
 </RelativeLayout>
