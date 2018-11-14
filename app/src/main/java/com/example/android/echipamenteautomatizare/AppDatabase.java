@@ -6,6 +6,7 @@ import android.arch.persistence.room.Room;
 import android.arch.persistence.room.RoomDatabase;
 import android.arch.persistence.room.migration.Migration;
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.util.Log;
 
 import com.example.android.echipamenteautomatizare.DAOs.CPUDao;
@@ -13,13 +14,15 @@ import com.example.android.echipamenteautomatizare.DAOs.CardDao;
 import com.example.android.echipamenteautomatizare.DAOs.IOOnboardDao;
 import com.example.android.echipamenteautomatizare.DAOs.ManufacturerDao;
 import com.example.android.echipamenteautomatizare.DAOs.ProtocolDao;
+import com.example.android.echipamenteautomatizare.DAOs.UserDao;
 import com.example.android.echipamenteautomatizare.Objects.CPU;
 import com.example.android.echipamenteautomatizare.Objects.Card;
 import com.example.android.echipamenteautomatizare.Objects.IOOnboard;
 import com.example.android.echipamenteautomatizare.Objects.Manufacturer;
 import com.example.android.echipamenteautomatizare.Objects.Protocol;
+import com.example.android.echipamenteautomatizare.Objects.User;
 
-@Database(entities = {Manufacturer.class, Protocol.class, Card.class, IOOnboard.class, CPU.class}, version = 8, exportSchema = false)
+@Database(entities = {Manufacturer.class, Protocol.class, Card.class, IOOnboard.class, CPU.class, User.class}, version = 10, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
     private static final String LOG_TAG = AppDatabase.class.getSimpleName();
     private static final Object LOCK = new Object();
@@ -33,7 +36,7 @@ public abstract class AppDatabase extends RoomDatabase {
                 sInstance = Room.databaseBuilder(context.getApplicationContext(),
                         AppDatabase.class, AppDatabase.DATABASE_NAME)
                         .allowMainThreadQueries()
-                        .addMigrations(MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4, MIGRATION_4_5)
+                        .addMigrations(MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4, MIGRATION_4_5, MIGRATION_8_9, MIGRATION_9_10)
                 .build();
             }
         }
@@ -86,9 +89,27 @@ public abstract class AppDatabase extends RoomDatabase {
         }
     };
 
+    private static final Migration MIGRATION_8_9 = new Migration(8, 9) {
+        @Override
+        public void migrate(@NonNull SupportSQLiteDatabase database) {
+            database.execSQL("CREATE TABLE `users` (`id` INTEGER PRIMARY KEY NOT NULL, " +
+                    "`username` TEXT NOT NULL, " +
+                    "`password` TEXT NOT NULL);");
+        }
+    };
+
+    private static final Migration MIGRATION_9_10 = new Migration(9, 10) {
+        @Override
+        public void migrate(@NonNull SupportSQLiteDatabase database) {
+            database.execSQL("INSERT INTO users (username, password) VALUES ('admin', 'adminP');");
+            database.execSQL("INSERT INTO users (username, password) VALUES ('client', 'clientP');");
+        }
+    };
+
     public abstract ManufacturerDao manufacturerDao();
     public abstract ProtocolDao protocolDao();
     public abstract CardDao cardDao();
     public abstract IOOnboardDao ioOnboardDao();
     public abstract CPUDao cpuDao();
+    public abstract UserDao userDao();
 }

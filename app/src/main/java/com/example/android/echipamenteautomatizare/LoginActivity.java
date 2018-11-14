@@ -15,10 +15,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        final String client = "client";
-        final String clientP = "clientP";
-        final String admin = "admin";
-        final String adminP = "adminP";
+        final AppDatabase database = AppDatabase.getsInstance(this);
 
         Button submitButton = findViewById(R.id.login_submit);
         final EditText usernameEditText = findViewById(R.id.login_username);
@@ -38,14 +35,21 @@ public class LoginActivity extends AppCompatActivity {
                 }
 
                 if(credentials){
-                    if(usernameEditText.getText().toString().equals(admin) && passwordEditText.getText().toString().equals(adminP)){
-                        Intent adminIntent = new Intent(getApplicationContext(), AdminActivity.class);
-                        startActivity(adminIntent);
-                    } else if(usernameEditText.getText().toString().equals(client) && passwordEditText.getText().toString().equals(clientP)){
-                        Intent clientIntent = new Intent(getApplicationContext(), ClientActivity.class);
-                        startActivity(clientIntent);
-                    } else {
+                    String username = usernameEditText.getText().toString();
+                    String password = passwordEditText.getText().toString();
+                    String dbPassword = database.userDao().loadPasswordForUsername(username);
+                    if(dbPassword == null){
                         Toast.makeText(getApplicationContext(), "Unknown credentials", Toast.LENGTH_SHORT).show();
+                    } else {
+                        if(dbPassword.equals(password) && username.equals("admin")){
+                            Intent adminIntent = new Intent(getApplicationContext(), AdminActivity.class);
+                            startActivity(adminIntent);
+                        } else if(dbPassword.equals(password) && username.equals("client")){
+                            Intent clientIntent = new Intent(getApplicationContext(), ClientActivity.class);
+                            startActivity(clientIntent);
+                        } else {
+                            Toast.makeText(getApplicationContext(), "Unknown credentials", Toast.LENGTH_SHORT).show();
+                        }
                     }
                 }
             }
