@@ -1,27 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    android:background="#424242"
+    android:padding="4dp"
+    android:elevation="2dp">
+
     <TextView
-        android:id="@+id/card_channels"
+        android:id="@+id/card_label"
+        android:text="Card: "
+        android:textSize="18sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
     <TextView
+        android:id="@+id/card_channels"
+        android:textSize="18sp"
+        android:layout_toEndOf="@id/card_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/card_label" />
+    <TextView
         android:id="@+id/card_name"
+        android:textSize="18sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toEndOf="@id/card_channels"
         android:layout_toRightOf="@id/card_channels" />
     <TextView
+        android:id="@+id/card_family_label"
+        android:layout_toLeftOf="@id/card_family"
+        android:textSize="16sp"
+        android:text="Family: "
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
         android:id="@+id/card_family"
+        android:textSize="16sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true" />
     <TextView
+        android:id="@+id/card_type_label"
+        android:text="Type: "
+        android:textSize="16sp"
+        android:layout_below="@id/card_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
         android:id="@+id/card_type"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/card_channels" />
+        android:layout_below="@id/card_channels"
+        android:layout_toEndOf="@id/card_type_label"
+        android:layout_toRightOf="@id/card_type_label" />
 
 </RelativeLayout>

@@ -1,13 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    android:background="#424242"
+    android:padding="4dp"
+    android:elevation="2dp">
     <TextView
-        android:id="@+id/ioonboard_channels"
+        android:id="@+id/ioonboard_label"
+        android:text="I/O Onboard: "
+        android:textSize="18sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
     <TextView
+        android:id="@+id/ioonboard_channels"
+        android:layout_toEndOf="@id/ioonboard_label"
+        android:textSize="18sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/ioonboard_label" />
+    <TextView
         android:id="@+id/ioonboard_name"
+        android:textSize="18sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toEndOf="@id/ioonboard_channels"

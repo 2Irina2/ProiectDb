@@ -9,20 +9,27 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
+import com.example.android.echipamenteautomatizare.DAOs.CPUCardDao;
 import com.example.android.echipamenteautomatizare.DAOs.CPUDao;
+import com.example.android.echipamenteautomatizare.DAOs.CPUProtocolDao;
 import com.example.android.echipamenteautomatizare.DAOs.CardDao;
 import com.example.android.echipamenteautomatizare.DAOs.IOOnboardDao;
 import com.example.android.echipamenteautomatizare.DAOs.ManufacturerDao;
 import com.example.android.echipamenteautomatizare.DAOs.ProtocolDao;
 import com.example.android.echipamenteautomatizare.DAOs.UserDao;
 import com.example.android.echipamenteautomatizare.Objects.CPU;
+import com.example.android.echipamenteautomatizare.Objects.CPUCard;
+import com.example.android.echipamenteautomatizare.Objects.CPUProtocol;
 import com.example.android.echipamenteautomatizare.Objects.Card;
 import com.example.android.echipamenteautomatizare.Objects.IOOnboard;
 import com.example.android.echipamenteautomatizare.Objects.Manufacturer;
 import com.example.android.echipamenteautomatizare.Objects.Protocol;
 import com.example.android.echipamenteautomatizare.Objects.User;
 
-@Database(entities = {Manufacturer.class, Protocol.class, Card.class, IOOnboard.class, CPU.class, User.class}, version = 10, exportSchema = false)
+@Database(entities = {Manufacturer.class, Protocol.class, Card.class, IOOnboard.class,
+        CPU.class, User.class, CPUCard.class, CPUProtocol.class},
+        version = 11,
+        exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
     private static final String LOG_TAG = AppDatabase.class.getSimpleName();
     private static final Object LOCK = new Object();
@@ -36,7 +43,8 @@ public abstract class AppDatabase extends RoomDatabase {
                 sInstance = Room.databaseBuilder(context.getApplicationContext(),
                         AppDatabase.class, AppDatabase.DATABASE_NAME)
                         .allowMainThreadQueries()
-                        .addMigrations(MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4, MIGRATION_4_5, MIGRATION_8_9, MIGRATION_9_10)
+                        .addMigrations(MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4, MIGRATION_4_5,
+                                MIGRATION_8_9, MIGRATION_9_10, MIGRATION_10_11)
                 .build();
             }
         }
@@ -85,7 +93,7 @@ public abstract class AppDatabase extends RoomDatabase {
                     + "`manufacturerId` INTEGER NOT NULL, "
                     + "`type` TEXT NOT NULL, "
                     + "FOREIGN KEY(manufacturerId) REFERENCES manufacturers(id));"
-                    );
+            );
         }
     };
 
@@ -106,10 +114,30 @@ public abstract class AppDatabase extends RoomDatabase {
         }
     };
 
+    private static final Migration MIGRATION_10_11 = new Migration(10,11) {
+        @Override
+        public void migrate(@NonNull SupportSQLiteDatabase database) {
+            database.execSQL("CREATE TABLE `cpus_cards` (`cpuId` INTEGER NOT NULL, "
+                    + "`cardId` INTEGER NOT NULL, "
+                    + "PRIMARY KEY(cpuId, cardId), "
+                    + "FOREIGN KEY(cpuId) REFERENCES cpus(id), "
+                    + "FOREIGN KEY(cardId) REFERENCES cards(id));"
+            );
+            database.execSQL("CREATE TABLE `cpus_protocols` (`cpuId` INTEGER NOT NULL, "
+                    + "`protocolId` INTEGER NOT NULL, "
+                    + "PRIMARY KEY(cpuId, protocolId), "
+                    + "FOREIGN KEY(cpuId) REFERENCES cpus(id), "
+                    + "FOREIGN KEY(protocolId) REFERENCES protocols(id));"
+            );
+        }
+    };
+
     public abstract ManufacturerDao manufacturerDao();
     public abstract ProtocolDao protocolDao();
     public abstract CardDao cardDao();
     public abstract IOOnboardDao ioOnboardDao();
     public abstract CPUDao cpuDao();
     public abstract UserDao userDao();
+    public abstract CPUCardDao cpuCardDao();
+    public abstract CPUProtocolDao cpuProtocolDao();
 }

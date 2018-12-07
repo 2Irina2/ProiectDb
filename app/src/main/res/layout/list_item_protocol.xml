@@ -1,20 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    android:background="#424242"
+    android:padding="4dp"
+    android:elevation="2dp">
 
     <TextView
-        android:id="@+id/protocol_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="16sp" />
-    <TextView
-        android:id="@+id/protocol_interface"
-        android:layout_below="@id/protocol_name"
+        android:id="@+id/protocol_name_label"
+        android:textSize="18sp"
+        android:text="Name: "
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
     <TextView
+        android:id="@+id/protocol_name"
+        android:layout_toEndOf="@id/protocol_name_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:layout_toRightOf="@id/protocol_name_label" />
+    <TextView
+        android:id="@+id/protocol_interface_label"
+        android:layout_below="@id/protocol_name_label"
+        android:text="Interface: "
+        android:textSize="16sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/protocol_interface"
+        android:layout_below="@id/protocol_name"
+        android:layout_toEndOf="@id/protocol_interface_label"
+        android:textSize="16sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/protocol_interface_label" />
+    <TextView
+        android:id="@+id/protocol_type_label"
+        android:textSize="16dp"
+        android:layout_toLeftOf="@id/protocol_type"
+        android:text="Type: "
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toStartOf="@id/protocol_type" />
+    <TextView
         android:id="@+id/protocol_type"
+        android:textSize="16dp"
         android:layout_alignParentEnd="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

@@ -4,74 +4,123 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingBottom="8dp">
-    
+    android:layout_margin="8dp"
+    android:background="#424242"
+    android:padding="4dp"
+    android:elevation="2dp">
+
+    <TextView
+        android:id="@+id/cpu_name_label"
+        android:text="Name: "
+        android:textSize="24sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
     <TextView
         android:id="@+id/cpu_name"
-        android:layout_width="58dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        tools:text="NUME"
-        app:layout_constraintStart_toStartOf="parent"
+        android:textSize="24sp"
+        app:layout_constraintStart_toEndOf="@id/cpu_name_label"
         app:layout_constraintTop_toTopOf="parent" />
-
+    <TextView
+        android:id="@+id/cpu_memory_label"
+        android:textSize="18sp"
+        android:text="Memory: "
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cpu_name_label"/>
     <TextView
         android:id="@+id/cpu_memory"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        tools:text="memorie"
-        app:layout_constraintStart_toStartOf="@+id/cpu_name"
+        android:textSize="18sp"
+        app:layout_constraintStart_toEndOf="@id/cpu_memory_label"
         app:layout_constraintTop_toBottomOf="@+id/cpu_name" />
-    
+    <TextView
+        android:id="@+id/cpu_io_label"
+        android:text="I/O: "
+        android:textSize="18sp"
+        android:layout_marginLeft="36dp"
+        android:layout_marginStart="36dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/cpu_memory"
+        app:layout_constraintTop_toBottomOf="@id/cpu_name_label" />
     <TextView
         android:id="@+id/cpu_io"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="36dp"
-        android:layout_marginStart="36dp"
-        tools:text="io"
-        app:layout_constraintStart_toEndOf="@+id/cpu_memory"
+        android:textSize="18sp"
+        app:layout_constraintStart_toEndOf="@+id/cpu_io_label"
         app:layout_constraintTop_toTopOf="@+id/cpu_memory" />
+    <TextView
+        android:id="@+id/cpu_supply_label"
+        android:text="Supply: "
+        android:textSize="16sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cpu_memory_label"/>
     
     <TextView
         android:id="@+id/cpu_supply"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        tools:text="alimentare"
-        app:layout_constraintStart_toStartOf="@+id/cpu_memory"
+        android:textSize="16sp"
+        app:layout_constraintStart_toEndOf="@id/cpu_supply_label"
         app:layout_constraintTop_toBottomOf="@+id/cpu_memory" />
-
+    <TextView
+        android:id="@+id/cpu_manufacturer_label"
+        android:textSize="16sp"
+        android:text="Manufacturer: "
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cpu_supply_label"/>
     <TextView
         android:id="@+id/cpu_manufacturer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        tools:text="producator"
-        app:layout_constraintStart_toStartOf="@+id/cpu_supply"
+        android:textSize="16sp"
+        app:layout_constraintStart_toEndOf="@+id/cpu_manufacturer_label"
         app:layout_constraintTop_toBottomOf="@+id/cpu_supply" />
-
     <TextView
         android:id="@+id/cpu_price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="8dp"
-        tools:text="pret"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_marginTop="4dp"
+        android:textColor="@color/newAccent"
+        app:layout_constraintEnd_toStartOf="@id/cpu_price_currency"
         app:layout_constraintTop_toTopOf="parent" />
-
+    <TextView
+        android:id="@+id/cpu_price_currency"
+        android:text=" RON"
+        android:layout_marginTop="4dp"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="@color/newAccent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+    <TextView
+        android:id="@+id/cpu_code_label"
+        android:text="Code: "
+        android:textSize="16sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@id/cpu_manufacturer"
+        app:layout_constraintEnd_toStartOf="@id/cpu_code"/>
     <TextView
         android:id="@+id/cpu_code"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        tools:text="cod"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="@+id/cpu_manufacturer"
         app:layout_constraintEnd_toEndOf="parent" />
 </android.support.constraint.ConstraintLayout>

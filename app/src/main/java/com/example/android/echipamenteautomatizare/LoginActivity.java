@@ -8,6 +8,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.util.List;
+
 public class LoginActivity extends AppCompatActivity {
 
     @Override
@@ -16,6 +18,11 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         final AppDatabase database = AppDatabase.getsInstance(this);
+
+        List<String> users = database.userDao().loadAllUsers();
+        if(users.isEmpty()){
+            Toast.makeText(this, "no users", Toast.LENGTH_SHORT).show();
+        }
 
         Button submitButton = findViewById(R.id.login_submit);
         final EditText usernameEditText = findViewById(R.id.login_username);

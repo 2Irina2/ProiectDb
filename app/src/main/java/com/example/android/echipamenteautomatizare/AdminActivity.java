@@ -19,6 +19,12 @@ import com.example.android.echipamenteautomatizare.Fragments.ProtocolsFragment;
 
 public class AdminActivity extends AppCompatActivity {
 
+    public static final int CPU_FRAGMENT = 0;
+    public static final int IOONBOARD_FRAGMENT = 1;
+    public static final int CARDS_FRAGMENT = 2;
+    public static final int PROTOCOLS_FRAGMENT = 3;
+    public static final int MANUFACTURERS_FRAGMENT = 4;
+
     private DrawerLayout mDrawerLayout;
 
     @Override
@@ -33,10 +39,33 @@ public class AdminActivity extends AppCompatActivity {
         actionbar.setHomeAsUpIndicator(R.drawable.ic_menu_black_24dp);
         getSupportActionBar().setTitle("Echipamente Automatizare");
 
+        int componentType = getIntent().getIntExtra("OpenFragment", CPU_FRAGMENT);
+
         mDrawerLayout = findViewById(R.id.drawer_layout);
         setupDrawerContent((NavigationView) findViewById(R.id.nav_view));
         FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.content_frame, new CpusFragment()).commit();
+        Fragment fragment;
+        switch (componentType){
+            case CPU_FRAGMENT:
+                fragment = new CpusFragment();
+                break;
+            case CARDS_FRAGMENT:
+                fragment = new CardsFragment();
+                break;
+            case IOONBOARD_FRAGMENT:
+                fragment = new IOOnboardFragment();
+                break;
+            case MANUFACTURERS_FRAGMENT:
+                fragment = new ManufacturersFragment();
+                break;
+            case PROTOCOLS_FRAGMENT:
+                fragment = new ProtocolsFragment();
+                break;
+            default:
+                fragment = new CpusFragment();
+                break;
+        }
+        fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
     }
 
     private void setupDrawerContent(NavigationView navigationView) {
