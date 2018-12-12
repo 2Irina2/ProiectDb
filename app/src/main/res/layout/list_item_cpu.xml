@@ -123,4 +123,36 @@
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="@+id/cpu_manufacturer"
         app:layout_constraintEnd_toEndOf="parent" />
+    <TextView
+        android:id="@+id/cpu_protocols_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Protocols: "
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cpu_manufacturer_label" />
+    <TextView
+        android:id="@+id/cpu_protocols"
+        android:text="prot1, prot3, prot5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="2dp"
+        app:layout_constraintStart_toEndOf="@+id/cpu_protocols_label"
+        app:layout_constraintTop_toBottomOf="@+id/cpu_manufacturer_label"/>
+    <TextView
+        android:id="@+id/cpu_cards_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cards: "
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cpu_protocols_label" />
+    <TextView
+        android:id="@+id/cpu_cards"
+        android:text="card1, card3, card5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="2dp"
+        app:layout_constraintStart_toEndOf="@+id/cpu_cards_label"
+        app:layout_constraintTop_toBottomOf="@+id/cpu_protocols_label"/>
 </android.support.constraint.ConstraintLayout>

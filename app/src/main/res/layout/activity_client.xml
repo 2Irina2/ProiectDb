@@ -1,14 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ClientActivity">
-
+    tools:context=".ClientActivity"
+    android:padding="16dp">
+    
     <TextView
+        android:id="@+id/specs_memory_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="client"/>
+        android:text="Memory"/>
+    <EditText
+        android:id="@+id/specs_memory"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/specs_memory_label"
+        android:inputType="number" />
+    <TextView
+        android:id="@+id/specs_supply_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Supply"
+        android:layout_below="@id/specs_memory"/>
+    <EditText
+        android:id="@+id/specs_supply"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/specs_supply_label"
+        android:inputType="number" />
 
-</android.support.constraint.ConstraintLayout>
+    <TextView
+        android:id="@+id/specs_price_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Maximum price"
+        android:layout_below="@id/specs_supply"/>
+    <EditText
+        android:id="@+id/specs_price"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/specs_price_label"
+        android:inputType="number" />
+
+    <LinearLayout
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <Button
+            android:id="@+id/specs_show_all"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="show"/>
+        <Button
+            android:id="@+id/specs_search_manufacturer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="search by manufacturer"/>
+        <Button
+            android:id="@+id/specs_search_ioonboard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="search by i/o onboard"/>
+    </LinearLayout>
+
+</RelativeLayout>

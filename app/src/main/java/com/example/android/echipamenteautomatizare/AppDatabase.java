@@ -28,7 +28,7 @@ import com.example.android.echipamenteautomatizare.Objects.User;
 
 @Database(entities = {Manufacturer.class, Protocol.class, Card.class, IOOnboard.class,
         CPU.class, User.class, CPUCard.class, CPUProtocol.class},
-        version = 11,
+        version = 13,
         exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
     private static final String LOG_TAG = AppDatabase.class.getSimpleName();
@@ -44,7 +44,7 @@ public abstract class AppDatabase extends RoomDatabase {
                         AppDatabase.class, AppDatabase.DATABASE_NAME)
                         .allowMainThreadQueries()
                         .addMigrations(MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4, MIGRATION_4_5,
-                                MIGRATION_8_9, MIGRATION_9_10, MIGRATION_10_11)
+                                MIGRATION_8_9, MIGRATION_9_10, MIGRATION_10_11, MIGRATION_12_13)
                 .build();
             }
         }
@@ -129,6 +129,14 @@ public abstract class AppDatabase extends RoomDatabase {
                     + "FOREIGN KEY(cpuId) REFERENCES cpus(id), "
                     + "FOREIGN KEY(protocolId) REFERENCES protocols(id));"
             );
+        }
+    };
+
+    private static final Migration MIGRATION_12_13 = new Migration(12, 13) {
+        @Override
+        public void migrate(@NonNull SupportSQLiteDatabase database) {
+            database.execSQL("INSERT INTO users (username, password) VALUES ('admin', 'adminP');");
+            database.execSQL("INSERT INTO users (username, password) VALUES ('client', 'clientP');");
         }
     };
 

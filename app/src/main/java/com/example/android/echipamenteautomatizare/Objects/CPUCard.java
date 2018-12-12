@@ -17,16 +17,16 @@ import org.jetbrains.annotations.NotNull;
         })
 public class CPUCard {
     @NotNull
-    private int cpuId;
+    private long cpuId;
     @NotNull
     private int cardId;
 
-    public CPUCard(int cpuId, int cardId){
+    public CPUCard(long cpuId, int cardId){
         this.cpuId = cpuId;
         this.cardId = cardId;
     }
 
-    public int getCpuId() {
+    public long getCpuId() {
         return cpuId;
     }
 

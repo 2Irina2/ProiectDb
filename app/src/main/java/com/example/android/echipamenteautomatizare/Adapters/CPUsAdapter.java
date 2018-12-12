@@ -10,8 +10,11 @@ import android.widget.TextView;
 
 import com.example.android.echipamenteautomatizare.AppDatabase;
 import com.example.android.echipamenteautomatizare.Objects.CPU;
+import com.example.android.echipamenteautomatizare.Objects.Card;
+import com.example.android.echipamenteautomatizare.Objects.Protocol;
 import com.example.android.echipamenteautomatizare.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CPUsAdapter extends RecyclerView.Adapter<CPUsAdapter.MyViewHolder> {
@@ -22,7 +25,7 @@ public class CPUsAdapter extends RecyclerView.Adapter<CPUsAdapter.MyViewHolder> 
         mContext = context;
     }
 
-    public void setCards(List<CPU> cpus) {
+    public void setCPUs(List<CPU> cpus) {
         myCpus = cpus;
         notifyDataSetChanged();
     }
@@ -56,6 +59,21 @@ public class CPUsAdapter extends RecyclerView.Adapter<CPUsAdapter.MyViewHolder> 
         holder.cpuManufacturer.setText(manufacturerFamily);
         holder.cpuCode.setText(String.valueOf(cpu.getCode()));
         holder.cpuPrice.setText(String.valueOf(cpu.getPrice()));
+
+        AppDatabase db = AppDatabase.getsInstance(mContext);
+        List<Protocol> protocols = db.cpuProtocolDao().getProtocolsForCPUSelect(cpu.getId());
+        List<Card> cards = db.cpuCardDao().getCardsForCPUSelect(cpu.getId());
+
+        StringBuilder builder = new StringBuilder();
+        for(Protocol protocol:protocols){
+            builder.append(protocol.getName()).append(" ");
+        }
+        holder.cpuProtocols.setText(builder.toString());
+        builder.setLength(0);
+        for(Card card : cards){
+            builder.append(card.getChannels()).append(card.getName()).append(" ");
+        }
+        holder.cpuCards.setText(builder.toString());
     }
 
     @Override
@@ -75,6 +93,8 @@ public class CPUsAdapter extends RecyclerView.Adapter<CPUsAdapter.MyViewHolder> 
         TextView cpuManufacturer;
         TextView cpuPrice;
         TextView cpuCode;
+        TextView cpuProtocols;
+        TextView cpuCards;
 
         MyViewHolder(View itemView) {
             super(itemView);
@@ -85,6 +105,8 @@ public class CPUsAdapter extends RecyclerView.Adapter<CPUsAdapter.MyViewHolder> 
             cpuManufacturer = itemView.findViewById(R.id.cpu_manufacturer);
             cpuPrice = itemView.findViewById(R.id.cpu_price);
             cpuCode = itemView.findViewById(R.id.cpu_code);
+            cpuProtocols = itemView.findViewById(R.id.cpu_protocols);
+            cpuCards = itemView.findViewById(R.id.cpu_cards);
         }
     }
 }

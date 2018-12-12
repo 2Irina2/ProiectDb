@@ -14,7 +14,10 @@ import java.util.List;
 @Dao
 public interface IOOnboardDao {
     @Query("SELECT * FROM ioonboards")
-    LiveData<List<IOOnboard>> loadAllIOOnboards();
+    LiveData<List<IOOnboard>> loadAllIOOnboardsLive();
+
+    @Query("SELECT * FROM ioonboards")
+    List<IOOnboard> loadAllIOOnboards();
 
     @Query("SELECT channels FROM ioonboards WHERE id=:id")
     int loadChannelsForIOOnboard(final int id);

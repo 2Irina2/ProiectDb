@@ -13,7 +13,19 @@ import java.util.List;
 @Dao
 public interface ProtocolDao {
     @Query("SELECT * FROM protocols")
-    LiveData<List<Protocol>> loadAllProtocols();
+    LiveData<List<Protocol>> loadAllProtocolsLive();
+
+    @Query("SELECT * FROM protocols")
+    List<Protocol> loadAllProtocols();
+
+    @Query("SELECT id FROM protocols")
+    List<Integer> loadAllProtocolIds();
+
+    @Query("SELECT * FROM protocols WHERE id=:protocolId")
+    Protocol loadProtocol(int protocolId);
+
+    @Query("SELECT * FROM protocols WHERE name=:protocolName")
+    Protocol loadProtocolByName(String protocolName);
 
     @Insert
     void insertProtocol(Protocol protocol);

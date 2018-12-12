@@ -24,11 +24,11 @@ public class MainViewModel extends AndroidViewModel {
     public MainViewModel(@NonNull Application application){
         super(application);
         AppDatabase appDatabase = AppDatabase.getsInstance(this.getApplication());
-        manufacturers = appDatabase.manufacturerDao().loadAllManufacturers();
-        protocols = appDatabase.protocolDao().loadAllProtocols();
-        cards = appDatabase.cardDao().loadAllCards();
-        ioOnboards = appDatabase.ioOnboardDao().loadAllIOOnboards();
-        cpus = appDatabase.cpuDao().loadAllCpus();
+        manufacturers = appDatabase.manufacturerDao().loadAllManufacturersLive();
+        protocols = appDatabase.protocolDao().loadAllProtocolsLive();
+        cards = appDatabase.cardDao().loadAllCardsLive();
+        ioOnboards = appDatabase.ioOnboardDao().loadAllIOOnboardsLive();
+        cpus = appDatabase.cpuDao().loadAllCpusLive();
     }
 
     public LiveData<List<Manufacturer>> getManufacturers() {

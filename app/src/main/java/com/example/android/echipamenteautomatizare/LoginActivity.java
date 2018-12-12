@@ -6,7 +6,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.android.echipamenteautomatizare.Objects.User;
 
 import java.util.List;
 
@@ -18,6 +21,15 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         final AppDatabase database = AppDatabase.getsInstance(this);
+
+        TextView signIn = findViewById(R.id.login_sign_in);
+        signIn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                database.userDao().insertUser(new User("client", "clientP"));
+                database.userDao().insertUser(new User("admin", "adminP"));
+            }
+        });
 
         List<String> users = database.userDao().loadAllUsers();
         if(users.isEmpty()){
