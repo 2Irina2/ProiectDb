@@ -14,8 +14,10 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.example.android.echipamenteautomatizare.Objects.Card;
 import com.example.android.echipamenteautomatizare.Objects.IOOnboard;
 import com.example.android.echipamenteautomatizare.Objects.Manufacturer;
+import com.example.android.echipamenteautomatizare.Objects.Protocol;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,11 +32,11 @@ public class ClientActivity extends AppCompatActivity {
     Button showAll;
     Button searchMan;
     Button searchIO;
+    Button searchProtocol;
+    Button searchCard;
 
     AppDatabase mDb;
     LayoutInflater layoutInflater;
-
-    private String finalQuery = "SELECT * FROM cpus ";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +54,8 @@ public class ClientActivity extends AppCompatActivity {
         showAll = findViewById(R.id.specs_show_all);
         searchMan = findViewById(R.id.specs_search_manufacturer);
         searchIO = findViewById(R.id.specs_search_ioonboard);
+        searchProtocol = findViewById(R.id.specs_search_protocol);
+        searchCard = findViewById(R.id.specs_search_card);
 
         final StringBuilder stringBuilder = new StringBuilder();
         final StringBuilder countStringBuilder = new StringBuilder();
@@ -224,6 +228,111 @@ public class ClientActivity extends AppCompatActivity {
                                         .putExtra("query", stringBuilder.toString())
                                         .putExtra("countQuery", countStringBuilder.toString())
                                         .putExtra("averageQuery", averageStringBuilder.toString()));
+                                alertDialog.cancel();
+                                //Toast.makeText(getApplicationContext(), stringBuilder.toString(), Toast.LENGTH_LONG).show();
+                            }
+                        });
+                        Button buttonNegative = alertDialog.getButton(DialogInterface.BUTTON_NEGATIVE);
+                        buttonNegative.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                alertDialog.cancel();
+                                //Toast.makeText(getApplicationContext(), stringBuilder.toString(), Toast.LENGTH_LONG).show();
+                            }
+                        });
+                    }
+                });
+
+                alertDialog.show();
+            }
+        });
+
+        searchProtocol.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                List<Protocol> protocols = mDb.protocolDao().loadAllProtocols();
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(ClientActivity.this);
+                View dialog = layoutInflater.inflate(R.layout.dialog_spinner, null);
+                final AlertDialog alertDialog = builder.setView(dialog)
+                        .setTitle("Select Item: ")
+                        .setPositiveButton("Add", null)
+                        .setNegativeButton("Cancel", null)
+                        .create();
+
+                final Spinner spinner = dialog.findViewById(R.id.dialog_spinner);
+                List<String> protocolLabels = new ArrayList<>();
+                for (Protocol protocol : protocols) {
+                    protocolLabels.add(protocol.getName());
+                }
+                spinner.setAdapter(new ArrayAdapter<>(getApplicationContext(),
+                        android.R.layout.simple_spinner_item,
+                        protocolLabels));
+
+                alertDialog.setOnShowListener(new DialogInterface.OnShowListener() {
+                    @Override
+                    public void onShow(DialogInterface dialogInterface) {
+                        Button buttonPositive = alertDialog.getButton(DialogInterface.BUTTON_POSITIVE);
+                        buttonPositive.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                String selectedProtocol = spinner.getSelectedItem().toString();
+                                Protocol p = mDb.protocolDao().loadProtocolByName(selectedProtocol);
+                                startActivity(new Intent(getApplicationContext(), OfferActivity.class)
+                                        .putExtra("protocolId", p.getId()));
+                                alertDialog.cancel();
+                                //Toast.makeText(getApplicationContext(), stringBuilder.toString(), Toast.LENGTH_LONG).show();
+                            }
+                        });
+                        Button buttonNegative = alertDialog.getButton(DialogInterface.BUTTON_NEGATIVE);
+                        buttonNegative.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                alertDialog.cancel();
+                                //Toast.makeText(getApplicationContext(), stringBuilder.toString(), Toast.LENGTH_LONG).show();
+                            }
+                        });
+                    }
+                });
+
+                alertDialog.show();
+            }
+        });
+
+        searchCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                List<Card> cards = mDb.cardDao().loadAllCards();
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(ClientActivity.this);
+                View dialog = layoutInflater.inflate(R.layout.dialog_spinner, null);
+                final AlertDialog alertDialog = builder.setView(dialog)
+                        .setTitle("Select Item: ")
+                        .setPositiveButton("Add", null)
+                        .setNegativeButton("Cancel", null)
+                        .create();
+
+                final Spinner spinner = dialog.findViewById(R.id.dialog_spinner);
+                List<String> cardLabels = new ArrayList<>();
+                for (Card card : cards) {
+                    cardLabels.add(card.getChannels() + card.getName());
+                }
+                spinner.setAdapter(new ArrayAdapter<>(getApplicationContext(),
+                        android.R.layout.simple_spinner_item,
+                        cardLabels));
+
+                alertDialog.setOnShowListener(new DialogInterface.OnShowListener() {
+                    @Override
+                    public void onShow(DialogInterface dialogInterface) {
+                        Button buttonPositive = alertDialog.getButton(DialogInterface.BUTTON_POSITIVE);
+                        buttonPositive.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                String selectedCard = spinner.getSelectedItem().toString();
+                                int channels = Integer.valueOf(selectedCard.substring(0, selectedCard.length()-2));
+                                String name = selectedCard.substring(selectedCard.length()-2, selectedCard.length());
+                                startActivity(new Intent(getApplicationContext(), OfferActivity.class)
+                                        .putExtra("cardId", mDb.cardDao().loadCard(channels, name).getId()));
                                 alertDialog.cancel();
                                 //Toast.makeText(getApplicationContext(), stringBuilder.toString(), Toast.LENGTH_LONG).show();
                             }

@@ -11,6 +11,7 @@ import android.support.v7.widget.RecyclerView;
 import com.example.android.echipamenteautomatizare.Adapters.CPUsAdapter;
 import com.example.android.echipamenteautomatizare.Objects.CPU;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class OfferActivity extends AppCompatActivity {
@@ -27,13 +28,33 @@ public class OfferActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         String query = intent.getStringExtra("query");
-        String countQuery = intent.getStringExtra("countQuery");
-        String averageQuery = intent.getStringExtra("averageQuery");
+        int protocolId = intent.getIntExtra("protocolId", -1);
+        int cardId = intent.getIntExtra("cardId", -1);
 
-        int cpusCount = mDb.cpuDao().countCpus(new SimpleSQLiteQuery(countQuery));
-        float avgPrice = mDb.cpuDao().averagePrice(new SimpleSQLiteQuery(averageQuery));
-        actionBar.setTitle(Integer.toString(cpusCount) + " CPUs found -- Avg price " + avgPrice);
-        List<CPU> cpus =  mDb.cpuDao().loadCpusBySpecs(new SimpleSQLiteQuery(query));
+        List<CPU> cpus = new ArrayList<>();
+        if(query != null){
+            cpus =  mDb.cpuDao().loadCpusBySpecs(new SimpleSQLiteQuery(query));
+            String countQuery = intent.getStringExtra("countQuery");
+            String averageQuery = intent.getStringExtra("averageQuery");
+
+            int cpusCount = mDb.cpuDao().countCpus(new SimpleSQLiteQuery(countQuery));
+            float avgPrice = mDb.cpuDao().averagePrice(new SimpleSQLiteQuery(averageQuery));
+            actionBar.setTitle(Integer.toString(cpusCount) + " CPUs found -- Avg price " + avgPrice);
+        } else if(protocolId != -1){
+            cpus = mDb.cpuProtocolDao().getCPUsForProtocol(protocolId);
+            float average = 0;
+            for(CPU cpu : cpus){
+                average += cpu.getPrice();
+            }
+            actionBar.setTitle(Integer.toString(cpus.size()) + " CPUs found -- Avg price " + average / cpus.size());
+        } else if(cardId != -1){
+            cpus = mDb.cpuCardDao().getCPUsForCardJoin(cardId);
+            float average = 0;
+            for(CPU cpu : cpus){
+                average += cpu.getPrice();
+            }
+            actionBar.setTitle(Integer.toString(cpus.size()) + " CPUs found -- Avg price " + average / cpus.size());
+        }
         setUpRecyclerView(cpus);
     }
 

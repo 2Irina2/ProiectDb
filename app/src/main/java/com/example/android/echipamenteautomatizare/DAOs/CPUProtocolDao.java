@@ -20,7 +20,7 @@ public interface CPUProtocolDao {
 
     @Query("SELECT * FROM cpus INNER JOIN cpus_protocols ON cpus.id=cpus_protocols.cpuId " +
             "WHERE cpus_protocols.protocolId=:protocolId")
-    LiveData<List<CPU>> getCPUsForProtocol(int protocolId);
+    List<CPU> getCPUsForProtocol(int protocolId);
 
     @Query("SELECT * FROM protocols INNER JOIN cpus_protocols ON protocols.id=cpus_protocols.protocolId " +
             "WHERE cpus_protocols.cpuId=:cpuId")

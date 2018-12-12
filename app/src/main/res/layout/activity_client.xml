@@ -64,6 +64,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="search by i/o onboard"/>
+        <Button
+            android:id="@+id/specs_search_protocol"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="search by protocol"/>
+        <Button
+            android:id="@+id/specs_search_card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="search by card"/>
     </LinearLayout>
 
 </RelativeLayout>
